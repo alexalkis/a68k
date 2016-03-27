@@ -224,7 +224,14 @@ int Instructions(int loc)
  NOTE: The binary search doesn't use strcmp because this function
  returns incorrect values under MS-DOS Lattice 2.12.		      */
 {
+
+// For the love of god. strcmp is slower than C implementation. -- Alkis
+//#define USESTRCMP
+#ifdef USESTRCMP
+	register int cmp;
+#else
 	register char *i, *j;
+#endif
 	register int lower, upper, mid; /* Binary search controls */
 
 	if (optabsize == 0) { /* Determine size of opcode table. */
@@ -262,14 +269,22 @@ int Instructions(int loc)
 	}
 	while (lower < upper) {;
 		mid = (lower + upper) / 2; /* Search the opcode table. */
+#ifdef USESTRCMP
+		cmp = strcmp(OpCode,MnemTab[mid].Mnem);
+		if (cmp<0) {
+			upper = mid; /* Search lower half of table. */
+		} else if (cmp>0) {
+			lower = mid + 1; /* Search upper half of table. */
+#else
 		for (i = OpCode, j = MnemTab[mid].Mnem; *i == *j; i++, j++)
 			if (*i == '\0')
 				break; /* Find the first non-match. */
-		if (*i < *j)
+		if (*i < *j) {
 			upper = mid; /* Search lower half of table. */
-		else if (*i > *j)
+		} else if (*i > *j) {
 			lower = mid + 1; /* Search upper half of table. */
-		else if (MnemTab[mid].AMA != 0xFFFF) { /* Found it. */
+#endif
+		}else if (MnemTab[mid].AMA != 0xFFFF) { /* Found it. */
 			Op = MnemTab[mid].OpBits; /* Executable instruction */
 			AdrModeA = MnemTab[mid].AMA;
 			AdrModeB = MnemTab[mid].AMB;
