@@ -69,7 +69,7 @@ void LongPut(struct fs *f,long data,int length);
 int xopen(char *name,struct fs *f,char *desc);
 void xputs(struct fs *f,char *s);
 void xputl(struct fs *f,long data);
-void xputc(char byte, struct fs *f);
+void xputc(struct fs *f, char byte);
 void xclose(struct fs *f);
 void xwrite(struct fs *f);
 void Error(int pos,int errornum);

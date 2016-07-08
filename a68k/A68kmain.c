@@ -866,7 +866,7 @@ int main(argc, argv)
 	cend = clock();
 
 	printf("Lines:%d Start:%d End:%d TicksPerSec:%d\n", LineCount, (int) cstart, (int)cend,
-			CLOCKS_PER_SEC);
+			(int)CLOCKS_PER_SEC);
 	int linespersec = LineCount * CLOCKS_PER_SEC / (cend - cstart);
 	printf("Speed: %d lines per second. (%d lines per minute)\n", linespersec,linespersec*60);
 
@@ -954,8 +954,7 @@ int checkdupfile(name1, desc1, name2, desc2)
 	}
 }
 
-void startpass(pchar, maxheap2)
-	char pchar;long maxheap2;
+void startpass(char pchar, long maxheap2)
 /* Set up to start the next pass. */
 {
 	if (Quiet > 0) {

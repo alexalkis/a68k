@@ -382,6 +382,25 @@ int ObjDir(void)
 			*t++ = *s++;
 		*t = '\0';
 
+//		char strallignment[10];
+//		strallignment[0] = '\0';
+//		if (*s != '\0') {
+//			++s;
+//			printf("We are in... *s=%c\n",s[0]);
+//			while (isspace(*s)) // skip whitespace
+//				++s;
+//			if (*s == ',') {
+//				++s;
+//				while (isspace(*s)) // skip whitespace
+//					++s;
+//				t = strallignment;
+//				while (!isspace(*s) && (*s >= '0') && (*s <= '9') && (*s != '\0'))
+//					*t++ = *s++;
+//				*t = '\0';
+//				printf("Allignment: %s\n", strallignment);
+//			}
+//		}
+
 		if (!OpenIncl(tempop, InclList)) {
 			Error(SrcLoc, NoIncl); /* We couldn't open file. */
 			InclErrs = TRUE;

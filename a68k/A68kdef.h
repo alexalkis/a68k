@@ -29,6 +29,10 @@
 #include <stddef.h>
 #include <string.h>
 #include <fcntl.h>
+#ifndef USEAMIGAOS
+#include <sys/types.h>
+#include <unistd.h>
+#endif
 // #else
 // extern char *malloc();
 // extern int  open(), creat(), read(), write(), close(), unlink();

@@ -510,7 +510,7 @@ void AppendSdata(Data, n)
 		byte = (char) (Data >> ((3 - i) * 8));
 		TempAddr++;
 		if (!SFormat) {
-			xputc(byte, &Srec);
+			xputc(&Srec,byte);
 		} else {
 			Sdata[Sindex++] = byte;
 			if (((TempAddr & 0x0F) == 0) || (Sindex >= MAXSREC))
@@ -586,7 +586,7 @@ void FixOrg(void)
 			StartAddr = TempAddr;
 		}
 		while (TempAddr < AddrCnt) { /* Extend with binary zeros. */
-			xputc(0, &Srec);
+			xputc(&Srec,0);
 			TempAddr++;
 		}
 	}
@@ -970,7 +970,7 @@ void DumpName(struct fs *f,char *name,long flags)
 	xputl(f, templong); /* Write length and flags. */
 	xputs(f, name); /* Write the name itself. */
 	while (i & 3) {
-		xputc('\0', f); /* Pad the last word. */
+		xputc(f,'\0'); /* Pad the last word. */
 		i++;
 	}
 }
@@ -1071,16 +1071,16 @@ void xputl(struct fs *f, long data)
     *((long *)f->Ptr)=data; /* this needs big-endian machine which amiga is */
     f->Ptr+=4;				/* and we can save 4 calls to xputc...			*/
 #else
-	xputc((char) (data >> 24), f);
-	xputc((char) (data >> 16), f);
-	xputc((char) (data >> 8), f);
-	xputc((char) data, f);
+	xputc(f,(char) (data >> 24));
+	xputc(f,(char) (data >> 16));
+	xputc(f,(char) (data >> 8));
+	xputc(f,(char) data);
 #endif
 }
 
 #define NEWXPUTC
 #ifdef NEWXPUTC
-void xputc(char byte, struct fs *f)
+void xputc(struct fs *f, char byte)
 /* Writes the byte contained in "byte" to file "f". */
 {
 	*f->Ptr++ = byte;
@@ -1091,7 +1091,7 @@ void xputc(char byte, struct fs *f)
 }
 
 #else
-void xputc(char byte, struct fs *f)
+void xputc(struct fs *f, char byte)
 /* Writes the byte contained in "byte" to file "f". */
 {
 	register char *t;
