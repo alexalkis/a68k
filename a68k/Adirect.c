@@ -762,7 +762,8 @@ void DoSection(name, nameloc, type, typeloc, flags, flagloc)
 	}
 
 	for (s = type; *s; s++) /* Convert section type */
-		*s = toupper(*s); /*  to upper case. */
+		//*s = toupper(*s); /*  to upper case. */
+		*s &= (~ (1<<5)); /*  to upper case. */
 	if ((type[0] == '\0') || (strcmp(type, "CODE") == 0))
 		newflags = HunkCode; /* Code section */
 	else if (strcmp(type, "DATA") == 0)
@@ -778,7 +779,8 @@ void DoSection(name, nameloc, type, typeloc, flags, flagloc)
 
 	if (flags[0]) {
 		for (s = flags; *s; s++) /* Convert flags */
-			*s = toupper(*s); /*  to upper case. */
+			*s &= (~ (1<<5));
+			//*s = toupper(*s); /*  to upper case. */
 		if (strcmp(flags, "CHIP") == 0)
 			newflags |= MEMF_CHIP; /* CHIP memory */
 		else if (strcmp(flags, "FAST") == 0)

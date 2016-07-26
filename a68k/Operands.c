@@ -153,7 +153,11 @@ void GetOperand(oper, op, pcconv)
 	s = oper;
 	t = UCoper;
 	while (*s) {
+#ifdef FASTTOUPPER
+		*t++ = *s & (~ (1<<5)); /* Upper-case version */
+#else
 		*t++ = toupper(*s); /* Upper-case version */
+#endif
 		s++;
 	}
 	*t = '\0';
@@ -269,8 +273,8 @@ void GetOperand(oper, op, pcconv)
 		if (*s == '\0') /* If there's no index register, */
 			tempop[strlen(tempop) - 1] = '\0'; /* chop off parenthesis. */
 
-		if ((tempop[2] == '\0') && (toupper (tempop[0]) == 'P')
-				&& (toupper (tempop[1]) == 'C')) {
+		if ((tempop[2] == '\0') && ((tempop[0] & (~ (1<<5))) == 'P')
+				&& ((tempop[1] & (~ (1<<5))) == 'C')) {
 			op->Mode = PCDisp; /* Program Counter */
 			if (op->Hunk == CurrHunk) {
 				op->Value -= (AddrCnt + pcconv); /* Adjust displacement. */
@@ -309,7 +313,8 @@ void GetOperand(oper, op, pcconv)
 				t += 3;
 			} else {
 				*t++ = '\0'; /* Chop off size code. */
-				switch (toupper(*t)) {
+				//switch (toupper(*t)) {
+				switch (*t & (~ (1<<5))) {
 				case 'W': /* Word */
 					op->Xsize = Word;
 					break;
@@ -344,13 +349,13 @@ void GetOperand(oper, op, pcconv)
 
 	if ((*oper == '(') /* Operands of the form (xxxx).W or (xxxx).L */
 	&& (*(opend - 2) == ')') && (*(opend - 1) == '.')
-			&& ((toupper(*opend) == 'W') || (toupper(*opend) == 'L'))) {
+			&& (((*opend & (~ (1<<5))) == 'W') || ((*opend & (~ (1<<5))) == 'L'))) {
 		*(opend - 1) = '\0'; /* Temporarily cut off length specifier. */
 		op->Value = GetValue(oper, op->Loc); /* Get operand value. */
 		op->Hunk = Hunk2;
 		op->Defn = DefLine2;
 		op->Single = SingleFlag;
-		if (toupper(*opend) == 'W')
+		if ((*opend & (~ (1<<5))) == 'W')
 			op->Mode = AbsW; /* Absolute word */
 		else
 			op->Mode = AbsL; /* Absolute long */
@@ -525,9 +530,17 @@ int IsRegister(op, len)
 	register int i;
 
 	if (len == 2) { /* Two-character specification */
+#ifdef FASTTOUPPER
+		i = *op & (~(1<<5));
+#else
 		i = toupper(*op);
+#endif
 		s = op + 1;
+#ifdef FASTTOUPPER
+		if ((i == 'S') && ((*s & (~(1<<5))) == 'P')) {
+#else
 		if ((i == 'S') && (toupper (*s) == 'P')) {
+#endif
 			return (15); /* Stack Pointer */
 		} else if ((*s >= '0') && (*s <= '7')) {
 			if (i == 'A') {

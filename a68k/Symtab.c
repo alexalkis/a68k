@@ -534,9 +534,17 @@ void GetParts(void)
 		}
 	}
 	for (x = OpCode; *x; x++) /* Convert OpCode  */
+#ifdef FASTTOUPPER
+		*x &= (~(1<<5));
+#else
 		*x = toupper(*x); /*  to upper case. */
+#endif
 	x -= 2;
+#ifdef FASTTOUPPER
+	if ((x < OpCode) || (*x != 14)) /* If no explicit size is given */
+#else
 	if ((x < OpCode) || (*x != '.')) /* If no explicit size is given */
+#endif
 		Size = Word; /*  default to Word (16 bits).  */
 	else {
 		*x++ = '\0'; /* Chop off size extension. */

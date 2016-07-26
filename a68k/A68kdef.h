@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#define FASTTOUPPER
 
 //#if defined(__SASC) || defined(_GCC_)
 #include <stdlib.h>
