@@ -865,8 +865,7 @@ int main(argc, argv)
 
 	cend = clock();
 
-	printf("Lines:%d Start:%d End:%d TicksPerSec:%d\n", LineCount, (int) cstart, (int)cend,
-			(int)CLOCKS_PER_SEC);
+	//printf("Lines:%d Start:%d End:%d TicksPerSec:%d\n", LineCount, (int) cstart, (int)cend,	(int)CLOCKS_PER_SEC);
 	int linespersec = LineCount * CLOCKS_PER_SEC / (cend - cstart);
 	printf("Speed: %d lines per second. (%d lines per minute)\n", linespersec,linespersec*60);
 
