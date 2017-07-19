@@ -500,6 +500,8 @@ int main(argc, argv)
 	AddSymTab(".a68K", 1L, (long) ABSHUNK, 0, 4);
 	AddSymTab(".a68k", 1L, (long) ABSHUNK, 0, 4);
 
+	//AddSymTab("_LVOWrite", -48L, (long) ABSHUNK, 0, 0);
+
 	endfile = FALSE;
 	Dir = None;
 	while (!endfile && (Dir != End)) {

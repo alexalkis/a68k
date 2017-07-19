@@ -567,8 +567,8 @@ int IsRegister(op, len)
 	return (-1); /* Not a recognizable register */
 }
 
-int GetInstModeSize(Mode)
-	register int Mode;
+int GetInstModeSize(int Mode)
+
 /* Determines the size for the various instruction modes. */
 {
 	switch (Mode) {
