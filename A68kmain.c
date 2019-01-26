@@ -52,8 +52,8 @@ void __chkabort(void)
 }
 #endif
 
-int main(argc, argv)
-	int argc;char *argv[];
+int 
+main (int argc, char *argv[])
 {
 	clock_t cstart, cend;
 
@@ -500,7 +500,13 @@ int main(argc, argv)
 	AddSymTab(".a68K", 1L, (long) ABSHUNK, 0, 4);
 	AddSymTab(".a68k", 1L, (long) ABSHUNK, 0, 4);
 
-	//AddSymTab("_LVOWrite", -48L, (long) ABSHUNK, 0, 0);
+        #ifdef EMBEDLVO
+        for(int li = 0; li < 1195; ++li) {
+          AddSymTab(lvos[li].lvo,lvos[li].ofs,(long) ABSHUNK, 0, 0);
+          //printf("%s\n", lvos[li]);
+        }
+        #endif
+
 
 	endfile = FALSE;
 	Dir = None;

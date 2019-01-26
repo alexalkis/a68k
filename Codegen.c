@@ -69,8 +69,12 @@ void GetObjectCode(void)
 		if (ReadSymTab(tempop)) { /* Search for user macro. */
 			AddRef(LineCount);
 			if (InF->UPtr == 0) { /* If we're reading from a file */
-				InF->Pos = lseek(In.fd, 0L, 1); /*  remember where we are. */
-				InF->Pos -= In.Lim - In.Ptr;
+                          #ifdef USEAMIGAOS
+                          InF->Pos = Seek(In.fd,0,OFFSET_CURRENT);
+                          #else
+                          InF->Pos = lseek(In.fd, 0L, 1); /*  remember where we are. */
+                          #endif
+                          InF->Pos -= In.Lim - In.Ptr;
 			}
 			if (Sym->Defn < LineCount) { /* Only if previously defined! */
 				InFNum++;

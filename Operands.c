@@ -23,8 +23,8 @@
 #include "A68kdef.h"
 #include "A68kglb.h"
 
-int GetArgs(name)
-	char *name;
+int 
+GetArgs (char *name)
 /* Gets macro arguments and adds them to FNStack after adding "name".
  Returns the number of arguments added to the stack.
  Note that this might not be the full number of arguments
@@ -77,8 +77,8 @@ int GetArgs(name)
 	return (narg); /* Successful completion */
 }
 
-void EffAdr(EA, Bad)
-	register struct OpConfig *EA;int Bad;
+void 
+EffAdr (register struct OpConfig *EA, int Bad)
 /* Adds effective address field to Op (BITSET representing opcode). */
 {
 	if ((1 << (EA->Mode - 1)) IN Bad) {
@@ -93,8 +93,8 @@ void EffAdr(EA, Bad)
 	OperExt(EA);
 }
 
-void OperExt(EA)
-	register struct OpConfig *EA;
+void 
+OperExt (register struct OpConfig *EA)
 /* Calculate operand Extension word, and check range of operands. */
 {
 	switch (EA->Mode) {
@@ -128,8 +128,8 @@ void OperExt(EA)
 	}
 }
 
-void GetOperand(oper, op, pcconv)
-	char *oper;register struct OpConfig *op;int pcconv;
+void 
+GetOperand (char *oper, register struct OpConfig *op, int pcconv)
 /* Finds mode and value for source or destination operand.
  If PC-relative addressing is permitted, "pcconv" gives the
  offset to the displacement word; otherwise "pcconv" is zero. */
@@ -440,8 +440,8 @@ void GetOperand(oper, op, pcconv)
 	}
 }
 
-int GetMultReg(oper, loc)
-	char *oper;int loc;
+int 
+GetMultReg (char *oper, int loc)
 /* Builds a register mask for the MOVEM instruction.
  Returns the mask in the low-order portion of its value if
  "oper" is a valid multiple-register list; otherwise returns 0. */
@@ -495,8 +495,8 @@ int GetMultReg(oper, loc)
 	return (multext);
 }
 
-int GetAReg(op, len, loc)
-	char *op;int len, loc;
+int 
+GetAReg (char *op, int len, int loc)
 /* Validate an address register specification.
  Valid specifications are A0 through A7, SP, or an EQUR label.
  The address register number will be returned if it is valid.
@@ -514,8 +514,8 @@ int GetAReg(op, len, loc)
 	}
 }
 
-int IsRegister(op, len)
-	char *op;int len;
+int 
+IsRegister (char *op, int len)
 /* Check whether the current operand is an address or data register.
  Valid specifications are D0 through D7, A0 through A7, SP,
  or any symbol equated to a register with the EQUR directive.

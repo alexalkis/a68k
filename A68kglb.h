@@ -30,9 +30,10 @@
 #ifdef USEAMIGAOS
 #include <dos/dos.h>
 #include <proto/dos.h>
-#undef GLOBAL
+
 #endif
 
+#undef GLOBAL
 #ifdef PRIMARY
 #define GLOBAL
 #else
@@ -289,4 +290,12 @@ GLOBAL int ErrorCount;
 GLOBAL int ErrLim, ErrCode[ERRMAX], ErrPos[ERRMAX];
 
 
+#ifdef EMBEDLVO
+struct foo {
+  char *lvo;
+  int ofs;
+};
+
+extern struct foo lvos[1195];
+#endif
 #include "protos.h"

@@ -73,8 +73,8 @@ long AddrBndW(long v)
 	return (v);
 }
 
-long AddrBndL(v)
-	register long v;
+long 
+AddrBndL (register long v)
 /* Advances "v" to the next long-word boundary. */
 {
 	long templong;
@@ -88,8 +88,8 @@ long AddrBndL(v)
 	return (v);
 }
 
-void WriteListLine(f)
-	struct fs *f;
+void 
+WriteListLine (struct fs *f)
 /* Writes one line to the Listing file, including Object Code. */
 {
 	register int i, j, printed;
@@ -209,8 +209,8 @@ void WriteListLine(f)
 	}
 }
 
-void WriteSymTab(f)
-	struct fs *f;
+void 
+WriteSymTab (struct fs *f)
 /* Lists the symbol table in alphabetical order. */
 {
 	int printhunk, i;
@@ -352,8 +352,8 @@ void WriteSymTab(f)
 	SymSort = NULL;
 }
 
-void CheckPage(f, xhdr)
-	struct fs *f;int xhdr;
+void 
+CheckPage (struct fs *f, int xhdr)
 /* Checks if end of page reached yet -- if so, advances to next page. */
 {
 	register int printed;
@@ -393,8 +393,8 @@ void CheckPage(f, xhdr)
 	}
 }
 
-void StartSrec(f, idntname)
-	struct fs *f;char *idntname;
+void 
+StartSrec (struct fs *f, char *idntname)
 /* Writes object header record. */
 {
 	register long CheckSum, templong;
@@ -427,8 +427,8 @@ void StartSrec(f, idntname)
 	NumRExt = NumR32 = NumR16 = NumR8 = 0;
 }
 
-void WriteSrecLine(f)
-	struct fs *f;
+void 
+WriteSrecLine (struct fs *f)
 /* Transfers object code components to output buffer. */
 /* Moves long words or portions thereof. */
 {
@@ -451,8 +451,8 @@ void WriteSrecLine(f)
 	}
 }
 
-void AppendSdata(Data, n)
-	register long Data;int n;
+void 
+AppendSdata (register long Data, int n)
 /* If we are producing S-format records:
  Transfers "n" low-order bytes from "Data" to the output buffer.
  If the buffer becomes full, DumpSdata will be called to flush it.

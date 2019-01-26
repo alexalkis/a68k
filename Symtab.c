@@ -25,8 +25,8 @@
 
 long Value; /* Passed from ReadSymTab to CalcValue */
 
-int OpenIncl(name, dirlist)
-	char *name, *dirlist;
+int 
+OpenIncl (char *name, char *dirlist)
 /* Opens the file whose name is in "name".  The current
  directory is tried first.  If that fails, the directory
  names in "dirlist" (separated by commas) are then tried
