@@ -378,7 +378,7 @@ main (int argc, char *argv[])
 #ifdef MSDOS
 	_iomode = 0x8000;
 #endif
-
+	/*
 	if (cmderror) {
 		fprintf(stderr, "\n");
 		fprintf(stderr, "68000 Assembler - version %s\n", Version);
@@ -403,15 +403,35 @@ main (int argc, char *argv[])
 		fprintf(stderr, "            [-n]\n\n");
 		fprintf(stderr, "Heap size default:  -w");
 		fprintf(stderr, "%ld,%ld\n", (long) DEFHASH, (long) DEFHEAP2);
+		SrecFN[0] = '\0'; // Don't scratch the object file!
+		quit_cleanup("\n");
+	}
+	*/
+	if (cmderror) {
+		fprintf(stderr, "\n68000 Assembler - version %s\n"
+		"Copyright 1985 by Brian R. Anderson\n"
+		"AmigaDOS conversion copyright 1991 by Charlie Gibbs.\n\n"
+		"Usage: a68k <source file>\n"
+		"            [-d[[!]<prefix>]]       [-o<object file>]\n"
+		"            [-e[<equate file>]]     [-p<page depth>]\n"
+		"            [-f]                    [-q[<quiet interval>]]\n"
+		"            [-g]                    [-s]\n"
+		"            [-h<header file>]       [-t]\n"
+		"            [-i<include dirlist>]   [-w[<hash size>][,<heap size>]]\n"
+		"            [-k]                    [-x]\n"
+		"            [-l[<listing file>]]    [-y]\n"
+		"            [-m<small data offset>] [-z[<debug start>][,<debug end>]]\n"
+		"            [-n]\n\n"
+		"Heap size default:  -w%ld,%ld\n", Version, (long) DEFHASH, (long) DEFHEAP2);
 		SrecFN[0] = '\0'; /* Don't scratch the object file! */
 		quit_cleanup("\n");
 	}
 
 	if (Quiet != 0) {
-		printf("68000 Assembler - version %s\n", Version);
-		printf("Copyright 1985 by Brian R. Anderson\n");
-		printf("AmigaDOS conversion copyright 1991 by Charlie Gibbs.\n\n");
-		printf("Assembling %s\n\n", SourceFN);
+		printf("68000 Assembler - version %s\n"
+		"Copyright 1985 by Brian R. Anderson\n"
+		"AmigaDOS conversion copyright 1991 by Charlie Gibbs.\n\n"
+		"Assembling %s\n\n", Version, SourceFN);
 	}
 
 	/* Allocate initial symbol table chunks. */
@@ -835,15 +855,14 @@ main (int argc, char *argv[])
 	/* Display hashing statistics if required. */
 
 	if (HashStats && (NumSyms != 0)) {
-		puts("\n"); //printf ("\n");
-		printf("HASH CHAIN STATISTICS - %d symbols\n\n", NumSyms);
+		printf("\nHASH CHAIN STATISTICS - %d symbols\n\n", NumSyms);
 		templong = (NumSyms + 1) * sizeof(int);
 		HashCount = (int *) malloc((unsigned) templong);
 		if (HashCount == NULL)
 			quit_cleanup("Out of memory!\n");
 
-		printf("Length     No. of chains\n");
-		printf("------     -------------\n");
+		printf("Length     No. of chains\n"
+		       "------     -------------\n");
 		intptr = HashCount;
 		for (i = 0; i <= NumSyms; i++)
 			*(intptr++) = 0; /* Clear hash chain length counters. */
