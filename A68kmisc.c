@@ -1025,8 +1025,8 @@ void xputs(struct fs *f, char *s)
 {
 	register char *t, *l;
 
-//	static c = 0;
-//	printf("string %d times...(%s)\n",++c,s);
+//	static int c = 0;
+//	printf("string %d times...(%s) Len: %d\n",++c,s, strlen(s));
 
 	t = f->Ptr; /* Current position (use registers for speed) */
 	l = f->Lim; /* End of buffer */

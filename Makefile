@@ -8,4 +8,4 @@ a68k: $(OBJ)
 	ls -l a68k
 
 clean:
-	rm -rf a68k *.o *~
+	rm -rf a68k *.o *~ samples/*.o
