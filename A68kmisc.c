@@ -1177,17 +1177,13 @@ void Error(int pos, int errornum)
 	if (ErrLim == 1) /* If this is the first error for this line, */
 		DisplayLine(); /*  display the line and its number(s). */
 
-	/*
-	 * Gcc when used with -noixemul, turns printf("<single character>") to putchar
-	 * which then fails to find on linking.  I had to go with the ugly workarround
-	 * --Alkis
-	 */
-	printf("%s", "\t"); //printf ("\t");
+
+	printf ("\t");
 	for (i = 0; i < pos; i++)
 		if (Line[i] == '\t')
-			printf("%s", "\t"); //printf ("\t");
+			printf ("\t");
 		else
-			printf("%s", " "); //printf(" ");		/* Space over to error column. */
+			printf(" ");		/* Space over to error column. */
 	printf("^ %s\n", errmsg[errornum]); /* Error flag and message */
 	ErrorCount++; /* Count errors. */
 }
@@ -1199,7 +1195,7 @@ void DisplayLine(void)
 	struct InFCtl *inf;
 	int i;
 
-	printf("%s", "\n"); //puts("\n");//printf ("\n");
+	printf ("\n");
 	for (i = InFNum, inf = InF; i >= 0; i--, inf++) { /* Nested? */
 		if (inf->UPtr == 0)
 			printf("%s", inf->NPtr); /* Module name */
