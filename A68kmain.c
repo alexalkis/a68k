@@ -63,6 +63,7 @@ main (int argc, char *argv[])
 	int endfile; /* End-of-file flag */
 	long maxheap2; /* Maximum secondary heap size */
 	int cmderror;
+    int linespersec;
 	long codesize, datasize, bsssize;
 	int *intptr;
 	long templong;
@@ -893,7 +894,7 @@ main (int argc, char *argv[])
 	cend = clock();
 
 	//printf("Lines:%d Start:%d End:%d TicksPerSec:%d\n", LineCount, (int) cstart, (int)cend,	(int)CLOCKS_PER_SEC);
-	int linespersec = LineCount * CLOCKS_PER_SEC / (cend - cstart);
+    linespersec = LineCount * CLOCKS_PER_SEC / (cend - cstart);
 	printf("Speed: %d lines per second. (%d lines per minute)\n", linespersec,linespersec*60);
 
 	/* All done! */
