@@ -26,7 +26,9 @@
 
 #include <time.h>
 
-char *Version = "2.71 (April 16, 1991)";
+#define VERSION "2.71 (April 16, 1991)"
+char *Version = VERSION;
+
 
 #ifdef MSDOS
 /********************************************************************/
@@ -695,11 +697,11 @@ main (int argc, char *argv[])
 	PgCnt = 0;
 	if (!SuppList) {
 		CheckPage(&List, FALSE); /* Print headings. */
-		xputs(&List, "68000 Assembler - version ");
-		xputs(&List, Version);
-		xputs(&List, "\nCopyright 1985 by Brian R. Anderson.\n");
-		xputs(&List, "AmigaDOS conversion copyright 1991");
-		xputs(&List, " by Charlie Gibbs.\n\n");
+		xputs(&List, "68000 Assembler - version "
+		VERSION
+		"\nCopyright 1985 by Brian R. Anderson.\n"
+		"AmigaDOS conversion copyright 1991"
+		" by Charlie Gibbs.\n\n");
 		LnCnt += 4;
 	}
 
