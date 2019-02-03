@@ -1197,11 +1197,7 @@ void DisplayLine(void)
 
 	printf ("\n");
 	for (i = InFNum, inf = InF; i >= 0; i--, inf++) { /* Nested? */
-		if (inf->UPtr == 0)
-			printf("%s", inf->NPtr); /* Module name */
-		else
-			printf("(user macro)"); /* We're in a user macro. */
-		printf(" line %d\n", inf->Line); /* Line number in module */
+        printf("%s line %d\n", inf->NPtr ? inf->NPtr : "(user macro)", inf->Line); /* Module name */
 	}
 	printf("%5d   %s\n", LineCount, Line); /* The line itself */
 }

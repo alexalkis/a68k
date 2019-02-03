@@ -517,7 +517,8 @@ int ObjDir(void)
 		t = tempop;
 		*t++ = ' '; /* Prepend name with a */
 		while (*s) { /*  blank and convert  */
-			*t++ = toupper(*s); /*  it to upper case.  */
+			//*t++ = toupper(*s); /*  it to upper case.  */
+			*t++ = *s & (~(1<<5));
 			s++;
 		}
 		*t = '\0';
