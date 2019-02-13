@@ -738,8 +738,10 @@ main (int argc, char *argv[])
 			WriteSrecLine(&Srec);
 			AddrCnt += AddrAdv * DupFact; /* Advance the location counter. */
 		} else {
-			Error(0, EndErr); /* END statement is missing. */
-			WriteListLine(&List);
+			// Alkis: make it so it doesn't require the END statement...
+			//Error(0, EndErr); /* END statement is missing. */
+			//WriteListLine(&List);
+			Dir = End;
 		}
 	}
 	if ((HunkType == HunkNone) && (NumSyms != 0)) { /* Dummy section   */
