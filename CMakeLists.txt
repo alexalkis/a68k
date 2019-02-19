@@ -1,9 +1,16 @@
 cmake_minimum_required(VERSION 3.13)
 project(a68k C)
 
+
+
+
 if (CMAKE_C_COMPILER STREQUAL "/opt/amiga/gcc6/bin/m68k-amigaos-gcc")
     add_compile_options(-mcrt=nix13 -fbaserel -fomit-frame-pointer -msmall-code -Wall)
     set(CMAKE_EXE_LINKER_FLAGS "-s -mcrt=nix13 -fbaserel -msmall-code" CACHE INTERNAL "" FORCE)
+    FIND_PROGRAM(CRANKER cranker_generic PATHS "/usr/local/bin")
+    IF(CRANKER)
+        SET(CRANKER_COMMAND ${CRANKER} -f ${CMAKE_CURRENT_BINARY_DIR}/a68k -o ${CMAKE_CURRENT_BINARY_DIR}/a68kc)
+    ENDIF(CRANKER)
 endif(CMAKE_C_COMPILER STREQUAL "/opt/amiga/gcc6/bin/m68k-amigaos-gcc")
 
 set(CMAKE_C_STANDARD 11)
@@ -28,5 +35,6 @@ add_executable(a68k
 
 add_custom_command(TARGET a68k
         POST_BUILD
+        COMMAND ${CRANKER_COMMAND}
         COMMAND ls -l a68k
         )
