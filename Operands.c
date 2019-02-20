@@ -48,6 +48,7 @@ GetArgs (char *name)
 		t = currarg;
 		if ((instring = (*s == '<'))) /* String delimiter */
 			s++;
+		//TODO: Maybe introduce a newinstring = (*s == '"') and go for it?
 		while (1) {
 			if (*s == '\0')
 				break; /* End of line */

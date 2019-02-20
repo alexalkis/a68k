@@ -95,6 +95,7 @@ int ObjDir(void)
 						Error(s - Line, NoStrEnd);
 						break;
 					}
+					//TODO: Maybe add handling of \n here?
 					if (*s == delim) { /* End of string? */
 						if (*(++s) != delim) /* Check next character. */
 							break; /* End of string */
