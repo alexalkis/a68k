@@ -481,7 +481,7 @@ main (int argc, char *argv[])
 
 	/* Allocate the INCLUDE skip table. */
 
-	SkipLim = (struct SkipEnt *) malloc((unsigned) INCSKSIZ);
+	origSkipLim = SkipLim = (struct SkipEnt *) malloc((unsigned) INCSKSIZ);
 	if (SkipLim == NULL)
 		quit_cleanup("Out of memory!\n");
 	SkipIdx = SkipLim;
@@ -1076,8 +1076,8 @@ void quit_cleanup(s)
 	if (HashCount != NULL)
 		free(HashCount); /* Free hash statistics table. */
 
-//     if (SkipLim != NULL)
-//         free ( SkipLim );
+    if (origSkipLim != NULL)
+        free ( origSkipLim );
 
 	if (*s) { /* If we have an error message, */
 		if (SrecFN[0])

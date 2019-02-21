@@ -149,7 +149,7 @@ struct SetFixup {		/* SET symbol fixup entry */
     long Val;			/* Fixup value */
     long Hunk;			/* Fixup hunk number */
 };
-GLOBAL struct SkipEnt *SkipLim;	/* Logical end of skippable INCLUDEs */
+GLOBAL struct SkipEnt *SkipLim, *origSkipLim;	/* Logical end of skippable INCLUDEs */
 GLOBAL struct SkipEnt *SkipIdx;	/* Current skippable INCLUDE entry */
 GLOBAL struct SetFixup *SetFixLim;	/* Next available SetFixup */
 

@@ -1291,8 +1291,7 @@ void AddRef(linenum)
 	if (((char *) RefLim - (char *) SymCurr) > CHUNKSIZE) {
 		ref = (struct Ref *) malloc((unsigned) CHUNKSIZE);
 		if (ref == NULL) {
-			fprintf(stderr, "     \nOut of memory");
-			fprintf(stderr, " - cross-reference disabled.\n");
+			fprintf(stderr, "     \nOut of memory - cross-reference disabled.\n");
 			XrefList = FALSE;
 			return;
 		}
