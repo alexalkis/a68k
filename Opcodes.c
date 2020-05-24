@@ -267,7 +267,7 @@ int Instructions(int loc)
 		lower = oplimits[mid++];
 		upper = oplimits[mid];
 	}
-	while (lower < upper) {;
+	while (lower < upper) {
 		mid = (lower + upper) / 2; /* Search the opcode table. */
 #ifdef USESTRCMP
 		cmp = strcmp(OpCode,MnemTab[mid].Mnem);
