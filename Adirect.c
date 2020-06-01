@@ -747,10 +747,8 @@ int ObjDir(void)
 	return (Dir);
 }
 
-void DoSection(name, nameloc, type, typeloc, flags, flagloc)
-	char *name, *type, *flags;int nameloc, typeloc, flagloc;
 /* Processes SECTION directive or equivalent. */
-{
+void DoSection(char *name,int nameloc,char *type,int typeloc,char *flags,int flagloc) {
 	static long HunkPos; /* Seek address of start of section */
 	register char *s, *t;
 	long newflags, templong;
