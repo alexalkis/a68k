@@ -632,9 +632,9 @@ main(int argc, char *argv[]) {
         quit_cleanup("Fatal errors - assembly aborted\n");
 
     if (Quiet > 0)
-        fprintf(stderr, "%d\n", LineCount);
+        printf("%d\n", LineCount);
     else if (Quiet < 0)
-        fprintf(stderr, "%d\n\n", InF->Line);
+        printf("%d\n\n", InF->Line);
 
     /*----------------------------------------------------------------
 
@@ -762,10 +762,10 @@ main(int argc, char *argv[]) {
             Sect->Val = OrgHigh; /* We've ORGed higher. */
     }
     if (Quiet > 0)
-        fprintf(stderr, "%d", LineCount); /* Final line number */
+        printf("%d", LineCount); /* Final line number */
     else if (Quiet < 0)
-        fprintf(stderr, "%d\n", InF->Line);
-    fflush(stderr); /* Make sure it gets out. */
+        printf("%d\n", InF->Line);
+    fflush(stdout); /* Make sure it gets out. */
 #ifdef USEAMIGAOS
     Close(In.fd);
 #else
@@ -803,22 +803,22 @@ main(int argc, char *argv[]) {
     /* Display final error count. */
 
     if (Quiet != 0)
-        fprintf(stderr, "\nEnd of assembly - ");
+        printf("\nEnd of assembly - ");
     if (!SuppList)
         xputs(&List, "\nEnd of assembly - ");
     if (ErrorCount == 0) {
         if (Quiet != 0)
-            fprintf(stderr, "no errors were found.\n");
+            printf("no errors were found.\n");
         if (!SuppList)
             xputs(&List, "no errors were found.\n");
     } else if (ErrorCount == 1) {
         if (Quiet != 0)
-            fprintf(stderr, "1 error was found.\n");
+            printf("1 error was found.\n");
         if (!SuppList)
             xputs(&List, "1 error was found.\n");
     } else {
         if (Quiet != 0)
-            fprintf(stderr, "%d errors were found.\n", ErrorCount);
+            printf("%d errors were found.\n", ErrorCount);
         if (!SuppList) {
             sprintf(tempchar, "%d errors were found.\n", ErrorCount);
             xputs(&List, tempchar);
@@ -828,7 +828,7 @@ main(int argc, char *argv[]) {
     /* Display heap usage. */
 
     if (Quiet != 0)
-        fprintf(stderr, "Heap usage:  -w%ld", HashSize);
+        printf("Heap usage:  -w%ld", HashSize);
     if (!SuppList) {
         sprintf(tempchar, "Heap usage:  -w%ld", HashSize);
         xputs(&List, tempchar);
@@ -839,7 +839,7 @@ main(int argc, char *argv[]) {
     else
         templong += (long) (Heap2 + maxheap2 - (char *) LowInF);
     if (Quiet != 0)
-        fprintf(stderr, ",%ld\n", templong);
+        printf(",%ld\n", templong);
     if (!SuppList) {
         sprintf(tempchar, ",%ld\n", templong);
         xputs(&List, tempchar);
@@ -848,8 +848,8 @@ main(int argc, char *argv[]) {
     /* Display the total size of all section types. */
 
     if (Quiet != 0) {
-        fprintf(stderr, "Total hunk sizes:  %lx code, ", codesize);
-        fprintf(stderr, "%lx data, %lx BSS\n", datasize, bsssize);
+        printf("Total hunk sizes:  %lx code, ", codesize);
+        printf("%lx data, %lx BSS\n", datasize, bsssize);
     }
     if (!SuppList) {
         sprintf(tempchar, "Total hunk sizes:  %lx code, ", codesize);
@@ -990,10 +990,10 @@ void startpass(char pchar, long maxheap2)
 /* Set up to start the next pass. */
 {
     if (Quiet > 0) {
-        fprintf(stderr, "PASS %c line ", pchar);
-        fflush(stderr);
+        printf("PASS %c line ", pchar);
+        fflush(stdout);
     } else if (Quiet < 0) {
-        fprintf(stderr, "PASS %c\n", pchar);
+        printf("PASS %c\n", pchar);
     }
     NextFNS = Heap2;
     InF = (struct InFCtl *) (Heap2 + maxheap2);

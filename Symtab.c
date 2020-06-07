@@ -585,9 +585,9 @@ void ShowFile(int newline)
 {
 	if ((Quiet < 0) && (InF->UPtr == 0)) {
 		if (newline)
-			fprintf(stderr, "\n%s line ", InF->NPtr);
+			printf("\n%s line ", InF->NPtr);
 		else
-			fprintf(stderr, "%s line ", InF->NPtr);
+			printf("%s line ", InF->NPtr);
 	}
 }
 
@@ -595,16 +595,16 @@ void ShowLine(int i)
 /* Shows the current line number and backs up over it. */
 {
 	if (i >= 10000)
-		fprintf(stderr, "%5d\b\b\b\b\b", i);
+		printf("%5d\b\b\b\b\b", i);
 	else if (i >= 1000)
-		fprintf(stderr, "%4d\b\b\b\b", i);
+		printf("%4d\b\b\b\b", i);
 	else if (i >= 100)
-		fprintf(stderr, "%3d\b\b\b", i);
+		printf("%3d\b\b\b", i);
 	else if (i >= 10)
-		fprintf(stderr, "%2d\b\b", i);
+		printf("%2d\b\b", i);
 	else
-		fprintf(stderr, "%1d\b", i);
-	fflush(stderr); /* Make sure it gets out. */
+		printf("%1d\b", i);
+	fflush(stdout); /* Make sure it gets out. */
 }
 
 char *GetField(char *s, char *d)
