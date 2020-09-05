@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 project(a68k C)
 
+include(CheckIncludeFile)
+CHECK_INCLUDE_FILE(proto/exec.h AMIGA)
 
-
-
-if (CMAKE_C_COMPILER STREQUAL "/opt/amiga/gcc6/bin/m68k-amigaos-gcc")
+if (${AMIGA})
     add_compile_options(-mcrt=nix13 -fbaserel -fomit-frame-pointer -msmall-code -Wall)
     set(CMAKE_EXE_LINKER_FLAGS "-s -mcrt=nix13 -fbaserel -msmall-code" CACHE INTERNAL "" FORCE)
     FIND_PROGRAM(CRANKER cranker_generic PATHS "/usr/local/in")
@@ -21,7 +21,7 @@ else()
 #            "-s"
 #            "$<$<CONFIG:DEBUG>:-fsanitize=address>"
     )
-endif(CMAKE_C_COMPILER STREQUAL "/opt/amiga/gcc6/bin/m68k-amigaos-gcc")
+endif()
 
 set(CMAKE_C_STANDARD 11)
 
