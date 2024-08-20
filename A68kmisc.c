@@ -60,6 +60,7 @@ static char *errmsg[] ={
 		"More than one label on this line.",
 		"End of string is missing.",
 		"Short displacement can't be zero.",
+        "Invalid escaped character in string.",
 		""
 };
 

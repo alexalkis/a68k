@@ -478,10 +478,16 @@ void SubArgs(void)
 				x += strlen(x) + 1;
 				j--;
 			}
+// this is for breakpoint reasons.  Evaluating if '\n' can be interpreted within strings
+//            int alkis = 0;
+//            if (*x=='"')
+//                alkis = 1;
 			strcpy(t, x); /* Insert it. */
 		}
 		while (*t)
 			t++; /* Skip over replacement. */
+
+
 		strcpy(t, s); /* Remainder of Line */
 		strcpy(Line, subline); /* Replace Line. */
 		while (*t != '\\') /* Check for more substitutions. */

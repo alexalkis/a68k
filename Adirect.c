@@ -96,6 +96,25 @@ int ObjDir(void)
 						break;
 					}
 					//TODO: Maybe add handling of \n here?
+                    if (*s == '\\') {
+                        char c = * (s+1);
+                        switch(*(++s)) {
+                            case 'n':
+                                c = '\n';
+                                ++s;
+                                break;
+                            case '\\':
+                                c = '\\';
+                                ++s;
+                                break;
+                            default:
+                                Error(s - Line, NoValidEsc);
+                        }
+                        Src.Hunk = ABSHUNK;
+                        ObjString[nX++] = c;
+                        continue;
+                    }
+
 					if (*s == delim) { /* End of string? */
 						if (*(++s) != delim) /* Check next character. */
 							break; /* End of string */
@@ -355,6 +374,14 @@ int ObjDir(void)
 			}
 		}
 		break;
+
+    case Incdir:
+        s = Line + SrcLoc;
+        s = GetField(s, SrcOp); /* Get the incdir in SrcOp */
+        if (InclList[0])
+            strcat(InclList, ","); /* Add to previous list */
+        strcat(InclList, SrcOp);
+        break;
 
 	case Include: /* INCLUDE */
 	case Incbin: /* INCBIN */

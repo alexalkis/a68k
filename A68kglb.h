@@ -26,6 +26,9 @@
 // is builtin in the app). Meh. Anyways, it's the way to go if I ever get to make it run
 // in amigaos >=1.2.  As it is, it need OS >=2.0.
 
+#ifdef AMIGA
+#define USEAMIGAOS
+#endif
 
 #ifdef USEAMIGAOS
 #include <dos/dos.h>

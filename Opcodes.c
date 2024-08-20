@@ -125,6 +125,7 @@ static struct OpTab MnemTab[] = {
 	"IFNE",  0,      0xFFFF, IfNE,
 	"ILLEGAL", 0x4AFC, 0, 0,
 	"INCBIN", 0,     0xFFFF, Incbin,
+    "INCDIR",  0,    0xFFFF, Incdir,
 	"INCLUDE", 0,    0xFFFF, Include,
 	"JMP",   0x4EC0, 0, EA05f,
 	"JSR",   0x4E80, 0, EA05f,

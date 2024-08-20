@@ -168,6 +168,8 @@
 #define Equr	40
 #define Reg	41
 #define MacCall	42
+#define Incdir  43
+
 
 /* BITSETs of the modes MISSING from effective address modes  */
 #define  ea 0x0000	/* Effective addressing - all modes */
@@ -246,5 +248,6 @@
 #define MultLab  24
 #define NoStrEnd 25
 #define BccSDsp0 26
+#define NoValidEsc 27
 
 #define ERRMAX 10	/* Size of error message table */
